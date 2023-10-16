@@ -14,8 +14,7 @@ def getScreenElement(idToFetch) -> ET.Element:
     """
     tree = ET.parse(XML_PATH)
     root = tree.getroot()
-    xpath_expression = f".//screen[@id='{idToFetch}']"
-    result = root.find(xpath_expression)
+    result = root.find(f".//screen[@id='{idToFetch}']")
     
     if result is None:
         raise Exception("Missing <struct> node in screen XML definition")
