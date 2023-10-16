@@ -2,10 +2,14 @@
 <terminal>
     <title>Welcome to ROBCO Industries (TM) Termlink</title>
     <subtitle>Tom's Terminal</subtitle>
-    <screens>
-        <screen id="0">
-            <text>Hello World!</text>
-            <option>First Log</option>
-        </screen>
-    </screens>
+    <menus>
+        <menu id="0">
+            <notes>
+                <p>Hello World!</p>
+            </notes>
+            <options>
+                <option>First Log</option>
+            </options>
+        </menu>
+    </menus>
 </terminal>
