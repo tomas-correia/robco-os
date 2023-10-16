@@ -9,43 +9,43 @@ TEXT_TAG = "text"
 OPTION_TAG = "option"
 
 
-def getScreenElement(id: int) -> ET.Element:
+def get_screen_element(id: int) -> ET.Element:
     """
     Returns the screen `Element` with a given `id` attribute.
     """
     tree = ET.parse(XML_PATH)
     root = tree.getroot()
-    screenElement = root.find(f".screens//screen[@id='{id}']")
+    screen_element = root.find(f".screens//screen[@id='{id}']")
     
-    if screenElement is None:
+    if screen_element is None:
         raise Exception(f"No screen with ID {id}.")
     
-    return screenElement
+    return screen_element
 
 
-def getScreenText(id: int) -> str:
+def get_screen_text(id: int) -> str:
     """
     Returns a given screen's full text string, ready to be printed.
     """
-    screen = getScreenElement(id)
-    screenText = ""
+    screen = get_screen_element(id)
+    screen_text = ""
 
     elements = screen.findall(".*")
     num_elements = len(elements)
 
     for index, elem in enumerate(elements):
         if elem.tag == TEXT_TAG:
-            screenText += elem.text # type: ignore
+            screen_text += elem.text # type: ignore
         else:
-            screenText += f"[{elem.text}]"
+            screen_text += f"[{elem.text}]"
 
         if index < num_elements - 1:
-            screenText += "\n\n"
+            screen_text += "\n\n"
 
-    return screenText
+    return screen_text
 
 
-def renderScreen(window, id: int) -> None:
+def render_screen(window, id: int) -> None:
     """
     Renders a screen's content based on a given ID.
     """
@@ -54,7 +54,7 @@ def renderScreen(window, id: int) -> None:
    
     title_element = root.find("title")
     subtitle_element = root.find("subtitle")
-    screen_text = getScreenText(id)
+    screen_text = get_screen_text(id)
 
     result_text = ""
     if title_element is not None and title_element.text:
