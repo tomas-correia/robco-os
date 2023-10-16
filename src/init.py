@@ -17,7 +17,7 @@ def init(window):
 
 def boot(window):
     """
-    Gets the first screen and renders it.
+    Renders the first screen.
     """
-    render_screen(window, 0) # Display the first screen
+    render_screen(window, 0)
     window.getch()
