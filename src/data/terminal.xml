@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminal>
+    <welcome>Welcome to ROBCO Industries (TM) Termlink</welcome>
+    <title>John's Terminal</title>
+    <screens>
+        <screen id="0">
+            <text>Hello World!</text>
+            <option>Click Here</option>
+        </screen>
+    </screens>
+</terminal>

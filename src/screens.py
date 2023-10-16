@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 # Local modules
-from .paths import SCREENS_PATH
+from .paths import XML_PATH
 
 
 TEXT_TAG = "text"
@@ -12,9 +12,9 @@ def getScreenElement(idToFetch) -> ET.Element:
     """
     Returns the `Element` with a given `id` attribute.
     """
-    tree = ET.parse(SCREENS_PATH)
+    tree = ET.parse(XML_PATH)
     root = tree.getroot()
-    xpath_expression = f".screen[@id='{idToFetch}']"
+    xpath_expression = f".//screen[@id='{idToFetch}']"
     result = root.find(xpath_expression)
     
     if result is None:

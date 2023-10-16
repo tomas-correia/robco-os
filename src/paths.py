@@ -9,6 +9,6 @@ DATA_DIR = os.path.join(BASE_DIR, 'data')
 
 # -------------------------------- File Paths -------------------------------- #
 
-SCREENS_PATH = os.path.join(DATA_DIR, 'screens.xml')
+XML_PATH = os.path.join(DATA_DIR, 'terminal.xml')
 
 STRINGS_PATH = os.path.join(DATA_DIR, 'strings.xml')
