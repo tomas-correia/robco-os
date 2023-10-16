@@ -2,8 +2,7 @@
 import curses
 
 # Local modules
-from .write import write
-from .screens import getScreenText
+from .screens import renderScreen
 from .colors import NORMAL_COLOR, SELECTED_COLOR
 
 
@@ -20,5 +19,5 @@ def boot(window):
     """
     Gets the first screen and renders it.
     """
-    write(window, getScreenText(0)) # Display the first screen
+    renderScreen(window, 0) # Display the first screen
     window.getch()
