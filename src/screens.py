@@ -8,13 +8,15 @@ from .write import write
 TEXT_TAG = "text"
 OPTION_TAG = "option"
 
+tree = ET.parse(XML_PATH)
+root = tree.getroot()
+option_lines = []
+
 
 def get_screen_element(id: int) -> ET.Element:
     """
     Returns the screen `Element` with a given `id` attribute.
     """
-    tree = ET.parse(XML_PATH)
-    root = tree.getroot()
     screen_element = root.find(f".screens//screen[@id='{id}']")
     
     if screen_element is None:
@@ -49,6 +51,11 @@ def render_screen(window, id: int) -> None:
     """
     Renders a screen's content based on a given ID.
     """
+    """
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+   
+    """   
     tree = ET.parse(XML_PATH)
     root = tree.getroot()
    
@@ -67,3 +74,4 @@ def render_screen(window, id: int) -> None:
     result_text += screen_text
 
     write(window, result_text)
+    
