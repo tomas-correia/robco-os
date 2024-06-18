@@ -1,0 +1,14 @@
+{
+    "title": "Welcome to ROBCO Industries (TM) Termlink",
+    "subtitle": "Tom's Terminal",
+    "menus": {
+        "0": {
+            "notes": [
+                "Hello World!"
+            ],
+            "options": [
+                "First Log"
+            ]
+        }
+    }
+}

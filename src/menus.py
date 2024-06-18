@@ -1,76 +1,77 @@
-import xml.etree.ElementTree as ET
+import json
 
 # Local modules
-from .paths import XML_PATH
+from .paths import TERMINAL_PATH
 from .write import write
 
 
-tree = ET.parse(XML_PATH)
-root = tree.getroot()
+with open(TERMINAL_PATH, 'r') as file:
+    root = json.load(file)
 
 
 def get_header() -> str:
-    title_element = root.find("title")
-    subtitle_element = root.find("subtitle")
+    title_element = root['title']
+    subtitle_element = root['subtitle']
 
     result_text = ""
-    if title_element is not None and title_element.text:
-        result_text += f"{title_element.text}\n"
-    if subtitle_element is not None and subtitle_element.text:
-        result_text += f"{subtitle_element.text}\n"
+    if title_element is not None:
+        result_text += f"{title_element}\n"
+    if subtitle_element is not None:
+        result_text += f"{subtitle_element}\n"
     if result_text:
         result_text += "\n"
 
     return result_text
 
 
-def get_menu_element(id: int) -> ET.Element:
+def get_menu(id: int):
     """
     Returns the menu `Element` with a given `id` attribute.
     """
-    menu_element = root.find(f".menus//menu[@id='{id}']")
+    menu = root['menus'][str(id)]
     
-    if menu_element is None:
+    if menu is None:
         raise Exception(f"No menu with ID {id}.")
     
-    return menu_element
+    return menu
 
 
-def get_menu_notes_string(menu: ET.Element) -> str:
+def get_menu_notes_string(menu) -> str:
     """
     Returns a given menu's full notes string, ready to be printed.
     """
-    menu_notes = ""
+    notes_string = ""
 
-    paragraph_elements = menu.findall(".notes/p")
+    notes = menu['notes']
 
-    for elem in paragraph_elements:
-        menu_notes += f"{elem.text}\n" # type: ignore # consider adding "or '' to use empty string"
+    for note in notes:
+        notes_string += f"{note}\n" # type: ignore # consider adding "or '' to use empty string"
 
-    return menu_notes
+    return notes_string
 
 
-def get_menu_options_string(menu: ET.Element) -> str:
+def get_menu_options_string(menu) -> str:
     """
     Returns a given menu's full options string, ready to be printed.
     """
-    menu_options = ""
+    options_string = ""
 
-    option_elements = menu.findall(".options/option")
+    options = menu['options']
     
-    for elem in option_elements:
-        menu_options += f"[{elem.text}]\n"
+    for option in options:
+        options_string += f"[{option}]\n"
 
-    return menu_options
+    return options_string
 
 
 def render_menu(window, id: int) -> None:
     """
     Renders a menu's content based on a given ID.
     """
-    header = get_header()
 
-    menu = get_menu_element(id)
+    menu = get_menu(id)
+
+    header = get_header()
     menu_notes = get_menu_notes_string(menu)
     menu_options = get_menu_options_string(menu)
 
